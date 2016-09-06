@@ -182,6 +182,7 @@ placeholderButton.addEventListener("click", savedInternshipsDisplay)
         } else {
             console.log(internshipObjects[currentInternship].name)
             console.log(returnSavedInternshipPageBackToRegularInternshipsBoolean)
+            console.log("The function to return works!")
             nextInternship = internshipObjects[currentInternship]
             document.getElementById("InternshipCardHeader").innerHTML = "Internship:"
             InternshipName.innerHTML = "Name: " + nextInternship.name
