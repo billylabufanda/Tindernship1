@@ -144,11 +144,16 @@ function clickCheck(index) {
 var starredInternshipsArray = []
 var starButtonHTML = document.getElementById("saveInternshipButton")
 starButtonHTML.addEventListener("click", starFunction2)
+var dummyvariable = 0
 
     function starFunction2() {
         // alert("starFunction2 works")
         starredInternshipsArray.push(internshipObjects[currentInternship])
-        console.log(starredInternshipsArray[currentInternship].name)
+        console.log(internshipObjects[currentInternship].name)
+        //         console.log(starredInternshipsArray[currentInternship].name)
+        console.log(starredInternshipsArray[dummyvariable].interest);
+        dummyvariable++;
+        console.log("dummyvariable = " + dummyvariable)
         //         $("#footer").append(starredInternshipsArray[currentInternship].interest)
         buttonclick()
     }
@@ -158,8 +163,8 @@ placeholderButton.addEventListener("click", savedInternshipsDisplay)
 
     function savedInternshipsDisplay() {
         var returnSavedInternshipPageBackToRegularInternshipsBoolean = true
-        console.log("testinglog")
         if(returnSavedInternshipPageBackToRegularInternshipsBoolean) {
+            console.log("testinglog")
             var x = 0
             document.getElementById("InternshipCardHeader").innerHTML = "Saved Internship:"
             InternshipName.innerHTML = "Name: " + starredInternshipsArray[x].name
@@ -171,9 +176,17 @@ placeholderButton.addEventListener("click", savedInternshipsDisplay)
             returnSavedInternshipPageBackToRegularInternshipsBoolean = false
             console.log(returnSavedInternshipPageBackToRegularInternshipsBoolean)
             nextInternshipButton.addEventListener("click", savedInternshipsButtonClick);
+            console.log("1x is equal to " + x)
 
             function savedInternshipsButtonClick() {
-                x++
+                if(x >= starredInternshipsArray.length){
+                    console.log("switching x back to 0")
+                    x = 0
+                }
+                else{
+                    x++
+                }
+                console.log("2x is equal to " + x)
                 InternshipName.innerHTML = "Name: " + starredInternshipsArray[x].name
                 InternshipInterest.innerHTML = "Interest: " + starredInternshipsArray[x].interest
                 InternshipSize.innerHTML = "Size: " + starredInternshipsArray[x].size
@@ -182,7 +195,7 @@ placeholderButton.addEventListener("click", savedInternshipsDisplay)
         } else {
             console.log(internshipObjects[currentInternship].name)
             console.log(returnSavedInternshipPageBackToRegularInternshipsBoolean)
-            console.log("The function to return works!")
+            console.log("elsefunctionisworking")
             nextInternship = internshipObjects[currentInternship]
             document.getElementById("InternshipCardHeader").innerHTML = "Internship:"
             InternshipName.innerHTML = "Name: " + nextInternship.name
