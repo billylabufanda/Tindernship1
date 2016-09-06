@@ -147,23 +147,27 @@ starButtonHTML.addEventListener("click", starFunction2)
 var dummyvariable = 0
 
     function starFunction2() {
-        // alert("starFunction2 works")
-        starredInternshipsArray.push(internshipObjects[currentInternship])
-        console.log(internshipObjects[currentInternship].name)
-        //         console.log(starredInternshipsArray[currentInternship].name)
-        console.log(starredInternshipsArray[dummyvariable].interest);
-        dummyvariable++;
-        console.log("dummyvariable = " + dummyvariable)
-        //         $("#footer").append(starredInternshipsArray[currentInternship].interest)
-        buttonclick()
+        //         console.log("starFunction2 works")
+        if(document.getElementById("InternshipCardHeader").innerHTML == "Saved Internship:") {
+            return("lol")
+        } else {
+            starredInternshipsArray.push(internshipObjects[currentInternship])
+            console.log(internshipObjects[currentInternship].name)
+            //         console.log(starredInternshipsArray[currentInternship].name)
+            console.log(starredInternshipsArray[dummyvariable].interest);
+            dummyvariable++;
+            console.log("dummyvariable = " + dummyvariable)
+            //         $("#footer").append(starredInternshipsArray[currentInternship].interest)  
+            buttonclick()
+        }
     }
     //Saved Internships Page
 var placeholderButton = document.getElementById("placeholderButton")
 placeholderButton.addEventListener("click", savedInternshipsDisplay)
+var returnSavedInternshipPageBackToRegularInternshipsBoolean = true
 
     function savedInternshipsDisplay() {
-        var returnSavedInternshipPageBackToRegularInternshipsBoolean = true
-        if(returnSavedInternshipPageBackToRegularInternshipsBoolean) {
+        if(returnSavedInternshipPageBackToRegularInternshipsBoolean && starredInternshipsArray.length > 0) {
             console.log("testinglog")
             var x = 0
             document.getElementById("InternshipCardHeader").innerHTML = "Saved Internship:"
@@ -179,11 +183,10 @@ placeholderButton.addEventListener("click", savedInternshipsDisplay)
             console.log("1x is equal to " + x)
 
             function savedInternshipsButtonClick() {
-                if(x >= starredInternshipsArray.length){
+                if(x >= starredInternshipsArray.length - 1) {
                     console.log("switching x back to 0")
                     x = 0
-                }
-                else{
+                } else {
                     x++
                 }
                 console.log("2x is equal to " + x)
@@ -192,15 +195,28 @@ placeholderButton.addEventListener("click", savedInternshipsDisplay)
                 InternshipSize.innerHTML = "Size: " + starredInternshipsArray[x].size
                 InternshipLocation.innerHTML = "Location: " + starredInternshipsArray[x].location
             }
+            returnSavedInternshipPageBackToRegularInternshipsBoolean = false
         } else {
             console.log(internshipObjects[currentInternship].name)
             console.log(returnSavedInternshipPageBackToRegularInternshipsBoolean)
             console.log("elsefunctionisworking")
-            nextInternship = internshipObjects[currentInternship]
+            console.log(internshipObjects[currentInternship].name)
             document.getElementById("InternshipCardHeader").innerHTML = "Internship:"
             InternshipName.innerHTML = "Name: " + nextInternship.name
             InternshipInterest.innerHTML = "Interest: " + nextInternship.interest
             InternshipSize.innerHTML = "Size: " + nextInternship.size
             InternshipLocation.innerHTML = "Location: " + nextInternship.location
+            placeholderButton.innerHTML = "Click for saved internships"
+            returnSavedInternshipPageBackToRegularInternshipsBoolean = true;
+            nextInternshipButton.addEventListener("click", buttonclick2)
+
+            function buttonclick2() {
+                currentInternship++
+                //Loops though database
+                if(currentInternship >= internshipObjects.length) {
+                    currentInternship = 0;
+                }
+                renderInternship()
+            }
         }
     }
